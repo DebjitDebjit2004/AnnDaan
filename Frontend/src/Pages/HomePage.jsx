@@ -71,16 +71,35 @@ const HomePage = () => {
     },
   ];
 
+  const backgroundImages = [
+    "https://images.unsplash.com/photo-1509099836639-18ba1795216d",
+    "https://images.unsplash.com/photo-1635929114944-8bab23b98e74?q=80&w=2134&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://plus.unsplash.com/premium_photo-1678837556129-d8cdd80cbe25?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1613399421095-41f5c68e9f8c?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  ];
+  
+  const [currentBg, setCurrentBg] = useState(0);
+  
+  // Auto-change background every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000); // 5000 ms = 5 seconds
+  
+    return () => clearInterval(interval);
+  }, []);  
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pt-20">
       <Navbar />
 
       {/* Hero Section */}
       <section
-        className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-white px-6 text-center"
+        className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-white px-6 pt-32 text-center transition-all duration-1000 ease-in-out"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1509099836639-18ba1795216d')",
+          `url(${backgroundImages[currentBg]}?auto=format&fit=crop&w=1920&q=80)`,
         }}
       >
         <motion.div
@@ -238,7 +257,7 @@ const HomePage = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="p-3 rounded-lg w-full sm:w-2/3 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder-gray-600 transition"
+                className="p-3 rounded-lg w-full sm:w-2/3 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder-gray-600 transition bg-amber-50"
               />
               <button className="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-orange-100 transition shadow-md">
                 Subscribe

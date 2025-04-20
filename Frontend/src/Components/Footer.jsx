@@ -21,6 +21,7 @@ const Footer = () => {
             <li><a href="/ngo" className="hover:text-orange-500 transition-all">NGO</a></li>
             <li><a href="/event" className="hover:text-orange-500 transition-all">Events</a></li>
             <li><a href="/donor" className="hover:text-orange-500 transition-all">Donors</a></li>
+            <li><a href="/volunteer" className="hover:text-orange-500 transition-all">Contact Us</a></li>
           </ul>
         </div>
 
@@ -33,13 +34,13 @@ const Footer = () => {
             <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-orange-500"><FaTwitter size={20} /></a>
             <a href="mailto:contact@ngoconnect.org" className="hover:text-orange-500"><FaEnvelope size={20} /></a>
           </div>
-          <p className="text-sm text-gray-600">contact@ngoconnect.org</p>
+          <p className="text-sm text-gray-600">contact@anndaan.org</p>
           <p className="text-sm text-gray-600">Uttarakhand, India</p>
         </div>
       </div>
 
       <div className="text-center text-sm text-gray-500 py-4 border-t border-gray-300">
-        © {new Date().getFullYear()} NGOConnect. All rights reserved.
+        © {new Date().getFullYear()} AnnDaan. All rights reserved.
       </div>
     </footer>
   );

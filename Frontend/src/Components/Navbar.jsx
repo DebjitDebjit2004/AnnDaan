@@ -11,15 +11,15 @@ const Navbar = () => {
     setMobileMenuOpen(false); // Close mobile menu on click
   };
 
-  const navLinks = ["Home", "NGO", "Event", "Donor", "Feeds"]; 
+  const navLinks = ["Home", "NGO", "Event", "Donor", "Feeds", "Contact Us"]; 
 
   return (
-    <nav className="bg-[#f8fafc] text-gray-800 shadow-md px-6 py-7 flex items-center justify-between">
+    <nav className="bg-white text-gray-800 shadow-md px-6 py-7 flex items-center justify-between fixed top-0 left-0 w-full z-50">
       {/* Logo */}
-      <div className="text-2xl font-bold text-orange-600">AnnDaan</div>
+      <div className="text-3xl font-bold text-orange-600">AnnDaan</div>
 
       {/* Desktop Links */}
-      <ul className="hidden md:flex space-x-12 font-medium">
+      <ul className="hidden md:flex space-x-12 font-medium text-lg">
         {navLinks.map((link) => (
           <li
             key={link}

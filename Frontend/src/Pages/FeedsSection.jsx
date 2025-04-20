@@ -90,7 +90,9 @@ const FeedsSection = () => {
   };
 
   const handleDeleteFeed = (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this feed?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this feed?"
+    );
     if (confirmDelete) {
       setFeeds((prev) => prev.filter((feed) => feed.id !== id));
     }
@@ -114,7 +116,9 @@ const FeedsSection = () => {
       <Navbar />
 
       <div className="min-h-screen bg-[#fefefe] py-10 px-4 md:px-20">
-        <h1 className="text-3xl font-bold text-orange-600 mb-8 items-center">All Feeds</h1>
+        <h1 className="text-3xl font-bold text-orange-600 mb-8 items-center">
+          All Feeds
+        </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {feeds.map((feed) => (
@@ -122,17 +126,14 @@ const FeedsSection = () => {
               key={feed.id}
               className="relative bg-white border border-gray-200 rounded-xl shadow-md p-5 hover:shadow-lg hover:bg-gray-50 transition-all duration-300"
             >
-              <button
-                onClick={() => handleDeleteFeed(feed.id)}
-                className="absolute top-3 right-3 text-red-500 hover:text-red-700"
-              >
-                <FaTrash />
-              </button>
+              {/* Delete button removed */}
 
               <div className="flex items-center mb-4">
                 <FaUserCircle className="text-3xl text-orange-500 mr-3" />
                 <div>
-                  <h2 className="text-sm font-semibold text-gray-800">{feed.author}</h2>
+                  <h2 className="text-sm font-semibold text-gray-800">
+                    {feed.author}
+                  </h2>
                   <div className="flex items-center text-xs text-gray-500">
                     <BiTimeFive className="mr-1" />
                     {feed.time}
@@ -150,7 +151,9 @@ const FeedsSection = () => {
               )}
 
               <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">{feed.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {feed.title}
+                </h3>
                 <p className="text-gray-700 text-sm">{feed.description}</p>
               </div>
 
@@ -158,7 +161,9 @@ const FeedsSection = () => {
                 <button
                   onClick={() => handleLike(feed.id)}
                   className={`flex items-center gap-2 transition ${
-                    liked[feed.id] ? "text-red-500 scale-105" : "hover:text-orange-500"
+                    liked[feed.id]
+                      ? "text-red-500 scale-105"
+                      : "hover:text-orange-500"
                   }`}
                 >
                   {liked[feed.id] ? <FaHeart /> : <FaRegHeart />}
@@ -194,7 +199,9 @@ const FeedsSection = () => {
       {commentingFeed !== null && (
         <div className="fixed inset-0 bg-white/10 backdrop-blur-md flex justify-center items-center z-50">
           <div className="bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 w-[90%] max-w-md border border-white/30">
-            <h2 className="text-lg font-bold text-orange-600 mb-4">Add a Comment</h2>
+            <h2 className="text-lg font-bold text-orange-600 mb-4">
+              Add a Comment
+            </h2>
             <textarea
               className="w-full border rounded-md p-2 mb-4 resize-none focus:outline-orange-400"
               rows={4}
@@ -223,7 +230,9 @@ const FeedsSection = () => {
       {addModalOpen && (
         <div className="fixed inset-0 bg-white/10 backdrop-blur-md flex justify-center items-center z-50">
           <div className="bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 w-[90%] max-w-md border border-white/30">
-            <h2 className="text-lg font-bold text-orange-600 mb-4">Add New Feed</h2>
+            <h2 className="text-lg font-bold text-orange-600 mb-4">
+              Add New Feed
+            </h2>
 
             <input
               type="text"
