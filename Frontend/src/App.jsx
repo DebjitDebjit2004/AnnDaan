@@ -10,6 +10,8 @@ import NGORegister from "./Pages/NGORegister";
 import DonorDetails from "./Pages/DonorDetails";
 import NgoDetails from "./Pages/NgoDetails";
 import FeedsSection from "./Pages/FeedsSection";
+import ContactUs from "./Pages/ContactUs";
+import AddFeed from "./Components/AddFeed";
 
 
 const App = () => {
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/donor-details" element={<DonorDetails />} />
         <Route path="/ngo-details" element={<NgoDetails />} />
         <Route path="/feeds" element={<FeedsSection />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/add-feed" element={<AddFeed />} />
       </Routes>
     </div>
   );

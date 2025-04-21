@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import FAQsSection from "../Components/FAQsSection";
 import FeedsCard from "../Components/FeedsCard";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -311,6 +312,9 @@ const HomePage = () => {
           </div>
         </FadeInWhenVisible>
       </section>
+
+        {/* FAQs Section */}
+        <FAQsSection />
 
       <Footer />
     </div>
