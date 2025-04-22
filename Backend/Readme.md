@@ -205,6 +205,69 @@ This document provides an overview of all the models used in the backend, along 
 
 ---
 
+## **Event Controller**
+
+### **Functionalities**
+
+1. **Create Event**
+   - **Description**: Creates a new event for the logged-in user.
+   - **Route**: `POST /anndaan/user/event/create`
+   - **Status Codes**:
+     - `201`: Event created successfully.
+     - `400`: Validation errors.
+     - `500`: Internal server error.
+   - **Messages**:
+     - Success: "Event created successfully."
+     - Failure: "Validation error" or "Internal server error."
+
+2. **Get All Events**
+   - **Description**: Retrieves all events created by the logged-in user.
+   - **Route**: `GET /anndaan/user/event/events`
+   - **Status Codes**:
+     - `200`: Events retrieved successfully.
+     - `500`: Internal server error.
+   - **Messages**:
+     - Success: "Events retrieved successfully."
+     - Failure: "Internal server error."
+
+3. **Get Event by ID**
+   - **Description**: Retrieves a specific event by its ID.
+   - **Route**: `GET /anndaan/user/event/event/:id`
+   - **Status Codes**:
+     - `200`: Event retrieved successfully.
+     - `404`: Event not found.
+     - `500`: Internal server error.
+   - **Messages**:
+     - Success: "Event retrieved successfully."
+     - Failure: "Event not found" or "Internal server error."
+
+4. **Update Event**
+   - **Description**: Updates an existing event by its ID.
+   - **Route**: `PUT /anndaan/user/event/update/:id`
+   - **Status Codes**:
+     - `200`: Event updated successfully.
+     - `400`: Validation errors.
+     - `403`: Unauthorized access.
+     - `404`: Event not found.
+     - `500`: Internal server error.
+   - **Messages**:
+     - Success: "Event updated successfully."
+     - Failure: "Validation error," "Unauthorized access," or "Event not found."
+
+5. **Delete Event**
+   - **Description**: Deletes an event by its ID.
+   - **Route**: `DELETE /anndaan/user/event/delete/:id`
+   - **Status Codes**:
+     - `200`: Event deleted successfully.
+     - `403`: Unauthorized access.
+     - `404`: Event not found.
+     - `500`: Internal server error.
+   - **Messages**:
+     - Success: "Event deleted successfully."
+     - Failure: "Unauthorized access," "Event not found," or "Internal server error."
+
+---
+
 ## **Services**
 
 1. **Validation Services**
@@ -232,3 +295,23 @@ This document provides an overview of all the models used in the backend, along 
 4. **Update Profile**
    - **Method**: `PUT`
    - **Endpoint**: `/anndaan/user/normal/update/:id`
+
+5. **Create Event**
+   - **Method**: `POST`
+   - **Endpoint**: `/anndaan/user/event/create`
+
+6. **Get All Events**
+   - **Method**: `GET`
+   - **Endpoint**: `/anndaan/user/event/events`
+
+7. **Get Event by ID**
+   - **Method**: `GET`
+   - **Endpoint**: `/anndaan/user/event/event/:id`
+
+8. **Update Event**
+   - **Method**: `PUT`
+   - **Endpoint**: `/anndaan/user/event/update/:id`
+
+9. **Delete Event**
+   - **Method**: `DELETE`
+   - **Endpoint**: `/anndaan/user/event/delete/:id`
