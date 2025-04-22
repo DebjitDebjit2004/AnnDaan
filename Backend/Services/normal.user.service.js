@@ -11,10 +11,12 @@ export const isValidPassword = (password) => {
     if (password.length < 8) {
         return "Password must be at least 8 characters long";
     }
-    
+};
+
+export const isValidPasswordFormat = (password) => {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
     return regex.test(password);
-};
+} 
 
 export const checkFieldValidation = (firstName, lastName, email, phone) => {
     if (!firstName || !lastName || !email || !phone) {

@@ -2,7 +2,7 @@ import bycrypt from "bcryptjs";
 
 import NormalUser from "../Models/normal.user.model.js";
 
-import { checkFieldValidation, isValidEmail, isValidPassword } from "../Services/normal.user.service.js";
+import { checkFieldValidation, isValidEmail, isValidPassword, isValidPasswordFormat } from "../Services/normal.user.service.js";
 import { generateToken } from "../Utils/generate.token.js";
 
 
@@ -24,11 +24,11 @@ export const Register = async (req, res) => {
         if (!isValidEmail(email)) {
             return res.status(400).json({ message: "Email must be a valid Gmail address" });
         }
-        
-        if (!isValidPassword(password)) {
+
+        if (!isValidPasswordFormat(password)) {
             return res.status(400).json({ message: "Password must contain at least one letter, one number, and one special character" });
         }
-        
+
         const normalUserExist = await NormalUser.findOne({ email });
         if (normalUserExist) {
             return res.status(400).json({ message: "Email already exists" });
@@ -58,7 +58,7 @@ export const Register = async (req, res) => {
             } else {
                 res.status(400).json({ message: "User registration failed" });
             }
-            
+
         } catch (error) {
             res.status(500).json({ message: "Error registering user", error });
         }
@@ -109,5 +109,37 @@ export const Logout = async (req, res) => {
 }
 
 export const updateProfile = async (req, res) => {
-    
+    const { firstName, lastName, email, phone } = req.body;
+    const userId = req.params.id;
+
+    if (req.user._id == userId) {
+        const errorMsg = checkFieldValidation(firstName, lastName, email, phone);
+
+        if (errorMsg) {
+            return res.status(400).json({ message: errorMsg });
+        }
+
+        if (!isValidEmail(email)) {
+            return res.status(400).json({ message: "Email must be a valid Gmail address" });
+        }
+
+        try {
+            const user = await NormalUser.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            const updatedUser = await NormalUser.findByIdAndUpdate(
+                userId,
+                { name: { firstName, lastName }, email, phone },
+                { new: true }
+            );
+
+            res.status(200).json({ message: "Profile updated successfully", updatedUser });
+        } catch (error) {
+            res.status(500).json({ message: "Server error", error });
+        }
+    } else {
+        return res.status(403).json({ message: "You are not authorized to update this profile" });
+    }
 }
