@@ -9,7 +9,7 @@ const DonorLogin = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-grow flex flex-col md:flex-row w-full">
+      <main className="flex-grow flex flex-col md:flex-row w-full mt-20">
         {/* Left Side - Image and Text */}
         <div className="w-full md:w-1/2 bg-gradient-to-br from-orange-400 to-green-500 text-white flex flex-col items-center justify-center p-12">
           <motion.img

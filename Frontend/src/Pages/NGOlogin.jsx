@@ -9,7 +9,7 @@ const NGOLogin = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <div className="flex flex-col md:flex-row flex-1 w-full">
+      <div className="flex flex-col md:flex-row flex-1 w-full mt-20">
         {/* Left Side */}
         <div className="w-full md:w-1/2 bg-gradient-to-br from-green-500 to-teal-400 text-white flex flex-col items-center justify-center p-12">
           <motion.img

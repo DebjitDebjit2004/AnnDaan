@@ -24,7 +24,7 @@ const DonorDetails = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-grow bg-gradient-to-br from-orange-50 to-green-50 py-10 px-4">
+      <main className="flex-grow bg-gradient-to-br from-orange-50 to-green-50 py-10 px-4 mt-20">
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-orange-200">
           <h2 className="text-2xl font-bold text-center text-orange-600 mb-6">
             Donor Details

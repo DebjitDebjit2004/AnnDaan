@@ -8,7 +8,7 @@ const DonorRegister = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100 px-4 py-10">
+      <main className="flex-grow flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100 px-4 py-10 mt-20">
         <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-orange-100">
           <h2 className="text-2xl font-bold text-amber-600 text-center mb-1">
             Donor / Organizer Registration
