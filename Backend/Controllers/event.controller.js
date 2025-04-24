@@ -1,4 +1,6 @@
 import Event from '../Models/event.model.js';
+import Location from "../Models/location.model.js";
+import Food from "../Models/food.model.js";
 
 // Create new event
 export const createEvent = async (req, res) => {
@@ -39,7 +41,10 @@ export const getEventById = async (req, res) => {
             return res.status(404).json({ message: 'Event not found' });
         }
 
-        res.status(200).json(event);
+        const location = await Location.find({event_id: req.params.id});
+        const food = await Food.find({ event_id: req.params.id })
+
+        res.status(200).json(event, location, food);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
@@ -92,6 +97,10 @@ export const deleteEvent = async (req, res) => {
         }
 
         await Event.deleteOne({ _id: req.params.id });
+
+        //Jab Event Delete ho rha hai tab automatically location and food bhi delete ho rha hai
+        await Location.deleteMany({ event_id: req.params.id });
+        await Food.deleteMany({ event_id: req.params.id });
         res.status(200).json({ message: 'Event deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
