@@ -13,8 +13,8 @@ import FeedsSection from "./Pages/FeedsSection";
 import ContactUs from "./Pages/ContactUs";
 import AddFeed from "./Components/AddFeed";
 import Events from "./Pages/Events";
-
-
+import EventRegister from "./Pages/EventRegister";
+import FoodDetail from "./Pages/FoodDetail";
 const App = () => {
   return (
     <div>
@@ -32,6 +32,8 @@ const App = () => {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/add-feed" element={<AddFeed />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/event-register" element={<EventRegister />} />
+        <Route path="/food-detail" element={<FoodDetail />} />
       </Routes>
     </div>
   );

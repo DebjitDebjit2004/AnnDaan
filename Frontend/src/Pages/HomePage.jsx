@@ -97,7 +97,7 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section
-        className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-white px-6 pt-32 text-center transition-all duration-1000 ease-in-out"
+        className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-white px-6 pt-32 text-center transition-opacity duration-2000 ease-in-out"
         style={{
           backgroundImage:
           `url(${backgroundImages[currentBg]}?auto=format&fit=crop&w=1920&q=80)`,
