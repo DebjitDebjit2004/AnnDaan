@@ -13,9 +13,10 @@ const NormalUserSchema = new mongoose.Schema({
             min: 3
         }
     },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true},
     password: { type: String, required: true , min: 8},
-    phone: { type: Number, required: true , min: 10, max: 10},
+    phone: { type: Number, required: true , min: 10},
 });
 
-export default mongoose.model('NormalUser', NormalUserSchema);
+const NormalUser = mongoose.model('NormalUser', NormalUserSchema);
+export default NormalUser;

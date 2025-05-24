@@ -5,12 +5,42 @@ const EventSchema = new mongoose.Schema({
   type_of_org: { 
     type: String, 
     required: true, 
-    enum: ['NGO', 'Corporate', 'Individual', 'Others']
+    enum: [
+      'Corporate',
+      'Social',
+      'Sports',
+      'Cultural',
+      'Academic',
+      'Religious',
+      'Political',
+      'Health',
+      'Environmental',
+      'Educational',
+      'Charitable',
+      'Other'
+    ],
   },
   event_type: { 
     type: String, 
     required: true, 
-    enum: ['Food Donation', 'Clothing Drive', 'Blood Donation', 'Awareness Campaign', 'Others']
+    enum: [
+      'Conference',
+      'Seminar',
+      'Workshop',
+      'Webinar',
+      'Concert',
+      'Festival',
+      'SportsEvent',
+      'Fundraiser',
+      'Exhibition',
+      'Meetup',
+      'Competition',
+      'Ceremony',
+      'Party',
+      'Wedding',
+      'CulturalEvent',
+      'Other'
+    ],
   }
 });
 
