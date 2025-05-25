@@ -15,6 +15,9 @@ import AddFeed from "./Components/AddFeed";
 import Events from "./Pages/Events";
 import EventRegister from "./Pages/EventRegister";
 import FoodDetail from "./Pages/FoodDetail";
+import EventDetails from "./Pages/EventDetails"; 
+import Chat from "./Pages/Chat";
+import NgoListing from "./Pages/NgoListing";
 const App = () => {
   return (
     <div>
@@ -31,9 +34,13 @@ const App = () => {
         <Route path="/feeds" element={<FeedsSection />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/add-feed" element={<AddFeed />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/event-listing" element={<Events />} />
         <Route path="/event-register" element={<EventRegister />} />
         <Route path="/food-detail" element={<FoodDetail />} />
+        <Route path="/event-details" element={<EventDetails />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/ngo-listing" element={<NgoListing />} />
+        {/* Add more routes as needed */}
       </Routes>
     </div>
   );

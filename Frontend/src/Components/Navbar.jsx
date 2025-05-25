@@ -1,5 +1,14 @@
 import React, { useState } from "react"; 
 import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+const navLinks = [
+  { name: "Home", to: "/" },
+  { name: "NGO", to: "/ngo-listing" },
+  { name: "Event", to: "/event-listing" },
+  { name: "Feeds", to: "/feeds" },
+  { name: "Contact Us", to: "/contactus" },
+];
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -11,8 +20,6 @@ const Navbar = () => {
     setMobileMenuOpen(false); // Close mobile menu on click
   };
 
-  const navLinks = ["Home", "NGO", "Event", "Donor", "Feeds", "Contact Us"]; 
-
   return (
     <nav className="bg-white text-gray-800 shadow-md px-6 py-7 flex items-center justify-between fixed top-0 left-0 w-full z-50">
       {/* Logo */}
@@ -21,14 +28,16 @@ const Navbar = () => {
       {/* Desktop Links */}
       <ul className="hidden md:flex space-x-12 font-medium text-lg">
         {navLinks.map((link) => (
-          <li
-            key={link}
-            onClick={() => handleLinkClick(link)}
-            className={`cursor-pointer hover:text-orange-500 transition ${
-              activeLink === link ? "text-orange-600 font-semibold" : ""
-            }`}
-          >
-            {link}
+          <li key={link.name}>
+            <Link
+              to={link.to}
+              className={`cursor-pointer hover:text-orange-500 transition ${
+                activeLink === link.name ? "text-orange-600 font-semibold" : ""
+              }`}
+              onClick={() => handleLinkClick(link.name)}
+            >
+              {link.name}
+            </Link>
           </li>
         ))}
       </ul>
@@ -68,13 +77,13 @@ const Navbar = () => {
         <ul className="absolute top-16 left-0 w-full bg-white text-gray-800 shadow-md py-4 px-6 flex flex-col space-y-4 md:hidden z-40">
           {navLinks.map((link) => (
             <li
-              key={link}
-              onClick={() => handleLinkClick(link)}
+              key={link.name}
+              onClick={() => handleLinkClick(link.name)}
               className={`cursor-pointer hover:text-orange-500 transition ${
-                activeLink === link ? "text-orange-600 font-semibold" : ""
+                activeLink === link.name ? "text-orange-600 font-semibold" : ""
               }`}
             >
-              {link}
+              {link.name}
             </li>
           ))}
         </ul>

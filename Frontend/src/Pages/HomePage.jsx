@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useAnimation } from "framer-motion";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import FAQsSection from "../Components/FAQsSection";
 import FeedsCard from "../Components/FeedsCard";
-import { motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 // Animation wrapper
@@ -97,29 +98,33 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section
-        className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-white px-6 pt-32 text-center transition-opacity duration-2000 ease-in-out"
+        className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-white px-6 pt-32 text-center transition-opacity duration-700 ease-in-out"
         style={{
           backgroundImage:
-          `url(${backgroundImages[currentBg]}?auto=format&fit=crop&w=1920&q=80)`,
+            `url(${backgroundImages[currentBg]}?auto=format&fit=crop&w=1920&q=80)`,
         }}
       >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="bg-opacity-60 p-8 rounded-xl"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Give the Child the Gift of Education
-          </h1>
-          <p className="text-lg md:text-xl mb-6">
-            Guidance brings a chance to dream. Be a ray of light for someone
-            today.
-          </p>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-semibold transition">
-            Join Our Team
-          </button>
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentBg}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="bg-opacity-60 p-8 rounded-xl w-full"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Give the Child the Gift of Education
+            </h1>
+            <p className="text-lg md:text-xl mb-6">
+              Guidance brings a chance to dream. Be a ray of light for someone
+              today.
+            </p>
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-semibold transition">
+              Join Our Team
+            </button>
+          </motion.div>
+        </AnimatePresence>
       </section>
 
       {/* Zig-Zag Ethical Section */}
