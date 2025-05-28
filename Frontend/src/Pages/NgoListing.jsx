@@ -78,14 +78,7 @@ const NgoListing = () => {
                   <span className="font-semibold">Certificates:</span>{" "}
                   {ngo.certificates.join(", ")}
                 </div>
-                <button
-                  className="mt-auto bg-gradient-to-r from-orange-400 to-green-500 text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all"
-                  // onClick={() => navigate(`/ngo-details/${ngo.id}`)}
-                  disabled
-                  title="View Details (Demo)"
-                >
-                  View Details
-                </button>
+                {/* Removed View Details button */}
               </div>
             </div>
           ))}

@@ -17,6 +17,7 @@ import EventRegister from "./Pages/EventRegister";
 import FoodDetail from "./Pages/FoodDetail";
 import EventDetails from "./Pages/EventDetails"; 
 import NgoListing from "./Pages/NgoListing";
+import Admin from "./Pages/Admin";
 const App = () => {
   return (
     <div>
@@ -38,7 +39,7 @@ const App = () => {
         <Route path="/food-detail" element={<FoodDetail />} />
         <Route path="/event-details" element={<EventDetails />} />
         <Route path="/ngo-listing" element={<NgoListing />} />
-        {/* Add more routes as needed */}
+        <Route path="/admin-dashboard" element={<Admin />} />
       </Routes>
     </div>
   );

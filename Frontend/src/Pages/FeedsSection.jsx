@@ -58,33 +58,39 @@ const FeedsSection = () => {
 
   const handleCommentSubmit = () => {
     if (comment.trim() && selectedFeed !== null) {
-      setFeeds((prevFeeds) =>
-        prevFeeds.map((feed) =>
-          feed.id === selectedFeed.id
-            ? { ...feed, comments: [...feed.comments, comment] }
-            : feed
-        )
+      // Update feeds array
+      const updatedFeeds = feeds.map((feed) =>
+        feed.id === selectedFeed.id
+          ? { ...feed, comments: [...feed.comments, comment] }
+          : feed
       );
+      setFeeds(updatedFeeds);
+
+      // Update selectedFeed state as well
+      setSelectedFeed((prev) =>
+        prev ? { ...prev, comments: [...prev.comments, comment] } : prev
+      );
+
       setComment("");
     }
   };
 
-  // const handleAddFeed = () => {
-  //   if (!newFeed.title || !newFeed.description || !newFeed.author) {
-  //     alert("Please fill in all fields.");
-  //     return;
-  //   }
-  //   const newEntry = {
-  //     id: feeds.length + 1,
-  //     ...newFeed,
-  //     time: "Just now",
-  //     comments: [],
-  //   };
-  //   setFeeds([newEntry, ...feeds]);
-  //   setNewFeed({ title: "", description: "", author: "", image: null });
-  //   setImagePreview(null);
-  //   setAddModalOpen(false);
-  // };
+  const handleAddFeed = () => {
+    if (!newFeed.title || !newFeed.description || !newFeed.author) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    const newEntry = {
+      id: feeds.length + 1,
+      ...newFeed,
+      time: "Just now",
+      comments: [],
+    };
+    setFeeds([newEntry, ...feeds]);
+    setNewFeed({ title: "", description: "", author: "", image: null });
+    setImagePreview(null);
+    setAddModalOpen(false);
+  };
 
   const handleShare = (feed) => {
     if (navigator.share) {
@@ -105,18 +111,20 @@ const FeedsSection = () => {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-[#fefefe] py-10 px-4 md:px-20">
+      <div className="min-h-screen bg-[#fefefe] py-10 px-4 md:px-20 mt-20">
         <h1 className="text-3xl font-bold text-orange-600 mb-8">All Feeds</h1>
         {/* Add Feed Button */}
-        <div className="flex justify-end mb-6">
-          <button
-            onClick={() => setAddFeedMode(true)}  // Toggle to show AddFeed component
-            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg shadow-md"
-          >
-            <FaPlus />
-            Add Feed
-          </button>
-        </div>
+        {!selectedFeed && (
+          <div className="flex justify-end mb-6">
+            <button
+              onClick={() => setAddFeedMode(true)}  // Toggle to show AddFeed component
+              className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg shadow-md"
+            >
+              <FaPlus />
+              Add Feed
+            </button>
+          </div>
+        )}
 
         {!selectedFeed ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
