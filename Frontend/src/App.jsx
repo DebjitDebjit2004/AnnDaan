@@ -16,7 +16,6 @@ import Events from "./Pages/Events";
 import EventRegister from "./Pages/EventRegister";
 import FoodDetail from "./Pages/FoodDetail";
 import EventDetails from "./Pages/EventDetails"; 
-import Chat from "./Pages/Chat";
 import NgoListing from "./Pages/NgoListing";
 const App = () => {
   return (
@@ -38,7 +37,6 @@ const App = () => {
         <Route path="/event-register" element={<EventRegister />} />
         <Route path="/food-detail" element={<FoodDetail />} />
         <Route path="/event-details" element={<EventDetails />} />
-        <Route path="/chat" element={<Chat />} />
         <Route path="/ngo-listing" element={<NgoListing />} />
         {/* Add more routes as needed */}
       </Routes>
