@@ -1,7 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
-// Add status to each event for demonstration
 const events = [
   {
     id: 1,
@@ -20,60 +18,63 @@ const events = [
     longDesc:
       "Over 500 saplings were planted in our community outreach campaign. Local volunteers, schools, and residents actively participated in making the city greener.",
     status: "inactive",
-  }
+  },
+  {
+    id: 3,
+    title: "Blood Donation Camp",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+    shortDesc: "Join our blood donation camp and save lives.",
+    longDesc: "Our blood donation camp was a huge success with over 200 donors. Thank you for your support!",
+    status: "active",
+  },
+  {
+    id: 4,
+    title: "Clean City Drive",
+    image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80",
+    shortDesc: "Making our city cleaner and greener.",
+    longDesc: "Volunteers gathered to clean up parks and public spaces, promoting cleanliness and environmental awareness.",
+    status: "inactive",
+  },
 ];
 
-export default function EventCard() {
-  const [activeId, setActiveId] = useState(null);
-
-  const toggleExpand = (id) => {
-    setActiveId(activeId === id ? null : id);
-  };
+export default function EventCardNGO({ eventList }) {
+  const eventData = eventList || events;
 
   return (
-    <div className="flex flex-col gap-6 p-6">
-      {events.map((event) => (
+    <div className="flex flex-col gap-10 p-8 max-w-2xl mx-auto">
+      {eventData.map((event) => (
         <motion.div
           key={event.id}
           layout
-          className="flex flex-col md:flex-row rounded-2xl bg-white/10 backdrop-blur-lg shadow-xl overflow-hidden cursor-pointer border border-white/20 relative"
-          onClick={() => toggleExpand(event.id)}
+          className="bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col transition hover:shadow-2xl min-h-[320px] w-full"
         >
-          {/* Status Badge */}
-          <span
-            className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold z-10 ${
-              event.status === "active"
-                ? "bg-green-100 text-green-700 border border-green-400"
-                : "bg-gray-200 text-gray-600 border border-gray-400"
-            }`}
-          >
-            {event.status === "active" ? "Active" : "Inactive"}
-          </span>
-          <img
-            src={event.image}
-            alt={event.title}
-            className="w-full md:w-1/3 object-cover h-64 md:h-auto"
-          />
-
-          <div className="p-4 flex flex-col justify-center md:w-2/3">
-            <h2 className="text-2xl font-bold text-orange-600 mb-2">{event.title}</h2>
-            <p className="text-black text-sm md:text-base">
-              {event.shortDesc}
-            </p>
-
-            <AnimatePresence>
-              {activeId === event.id && (
-                <motion.p
-                  className="text-black mt-4 text-sm md:text-base"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {event.longDesc}
-                </motion.p>
-              )}
-            </AnimatePresence>
+          <div className="relative">
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-56 object-cover rounded-t-2xl"
+            />
+            <span
+              className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold shadow ${
+                event.status === "active"
+                  ? "bg-green-100 text-green-700 border border-green-400"
+                  : "bg-gray-200 text-gray-600 border border-gray-400"
+              }`}
+            >
+              {event.status === "active" ? "Active" : "Inactive"}
+            </span>
+          </div>
+          <div className="flex flex-col flex-1 px-5 py-4">
+            <h2 className="text-xl font-bold text-gray-800 mb-1">{event.title}</h2>
+            <p className="text-gray-600 text-base mb-3">{event.shortDesc}</p>
+            <div className="mt-auto flex justify-between items-center">
+              <button
+                className="bg-gradient-to-r from-orange-400 to-green-500 text-white font-semibold px-5 py-2 rounded-lg text-sm shadow hover:opacity-90 transition"
+                onClick={() => window.location.href = `/event-details?id=${event.id}`}
+              >
+                Event Details
+              </button>
+            </div>
           </div>
         </motion.div>
       ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"; 
+import React, { useState, useRef, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -14,11 +14,32 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
+  const dropdownRef = useRef(null);
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
     setMobileMenuOpen(false); // Close mobile menu on click
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setDropdownOpen(false);
+      }
+    }
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   return (
     <nav className="bg-white text-gray-800 shadow-md px-6 py-7 flex items-center justify-between fixed top-0 left-0 w-full z-50">
@@ -45,7 +66,7 @@ const Navbar = () => {
       {/* Right Side */}
       <div className="flex items-center space-x-4">
         {/* Profile Image */}
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
           <img
             src="https://i.pinimg.com/736x/27/ed/99/27ed9905516ff87d07a1be9d6cf9e57b.jpg"
             alt="Profile"

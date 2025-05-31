@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { useNavigate } from 'react-router-dom';
-import { FaUserCircle, FaHeart, FaRegHeart, FaRegCommentDots, FaShare, FaPlus } from "react-icons/fa";
+import { FaUserCircle, FaHeart, FaRegHeart, FaRegCommentDots, FaShare, FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { BiTimeFive } from "react-icons/bi";
 import AddFeed from "../Components/AddFeed"; // Import the AddFeed component
 
@@ -47,6 +47,8 @@ const FeedsSection = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [newFeed, setNewFeed] = useState({ title: "", description: "", author: "", image: null });
   const [selectedFeed, setSelectedFeed] = useState(null);
+  const [editCommentIdx, setEditCommentIdx] = useState(null);
+  const [editCommentText, setEditCommentText] = useState("");
 
   const handleLike = (id) => {
     setLiked((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -102,6 +104,71 @@ const FeedsSection = () => {
     } else {
       navigator.clipboard.writeText(window.location.href);
       alert("Link copied to clipboard!");
+    }
+  };
+
+  // Edit comment handler
+  const handleEditComment = (idx, text) => {
+    setEditCommentIdx(idx);
+    setEditCommentText(text);
+  };
+
+  // Save edited comment
+  const handleSaveEditComment = () => {
+    if (editCommentText.trim() && selectedFeed !== null) {
+      // Update feeds array
+      const updatedFeeds = feeds.map((feed) =>
+        feed.id === selectedFeed.id
+          ? {
+              ...feed,
+              comments: feed.comments.map((cmt, idx) =>
+                idx === editCommentIdx ? editCommentText : cmt
+              ),
+            }
+          : feed
+      );
+      setFeeds(updatedFeeds);
+
+      // Update selectedFeed state as well
+      setSelectedFeed((prev) =>
+        prev
+          ? {
+              ...prev,
+              comments: prev.comments.map((cmt, idx) =>
+                idx === editCommentIdx ? editCommentText : cmt
+              ),
+            }
+          : prev
+      );
+
+      setEditCommentIdx(null);
+      setEditCommentText("");
+    }
+  };
+
+  // Delete comment handler
+  const handleDeleteComment = (idx) => {
+    if (selectedFeed !== null) {
+      // Update feeds array
+      const updatedFeeds = feeds.map((feed) =>
+        feed.id === selectedFeed.id
+          ? {
+              ...feed,
+              comments: feed.comments.filter((_, i) => i !== idx),
+            }
+          : feed
+      );
+      setFeeds(updatedFeeds);
+
+      // Update selectedFeed state as well
+      setSelectedFeed((prev) =>
+        prev
+          ? {
+              ...prev,
+              comments: prev.comments.filter((_, i) => i !== idx),
+            }
+          : prev
+      );
     }
   };
 
@@ -202,8 +269,48 @@ const FeedsSection = () => {
               <ul className="mb-3 space-y-2">
                 {selectedFeed.comments.length ? (
                   selectedFeed.comments.map((cmt, idx) => (
-                    <li key={idx} className="text-sm text-gray-800 bg-gray-100 p-2 rounded-md">
-                      {cmt}
+                    <li key={idx} className="text-sm text-gray-800 bg-gray-100 p-2 rounded-md flex items-center justify-between">
+                      {editCommentIdx === idx ? (
+                        <div className="flex w-full items-center gap-2">
+                          <input
+                            className="flex-1 border rounded px-2 py-1 text-sm"
+                            value={editCommentText}
+                            onChange={(e) => setEditCommentText(e.target.value)}
+                          />
+                          <button
+                            className="text-green-600 hover:text-green-800 px-2"
+                            onClick={handleSaveEditComment}
+                          >
+                            Save
+                          </button>
+                          <button
+                            className="text-gray-500 hover:text-gray-700 px-2"
+                            onClick={() => setEditCommentIdx(null)}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <span>{cmt}</span>
+                          <span className="flex gap-2 ml-2">
+                            <button
+                              className="text-blue-500 hover:text-blue-700"
+                              onClick={() => handleEditComment(idx, cmt)}
+                              title="Edit"
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                              className="text-red-500 hover:text-red-700"
+                              onClick={() => handleDeleteComment(idx)}
+                              title="Delete"
+                            >
+                              <FaTrash />
+                            </button>
+                          </span>
+                        </>
+                      )}
                     </li>
                   ))
                 ) : (
